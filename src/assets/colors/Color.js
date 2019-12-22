@@ -3,5 +3,5 @@ export default {
   TabBarBorder: '#888',
   IconTabBarActive: '#4ec3f9',
   IconTabBarDeActive: '#888',
-  TabBarBackground: '#fff',
+  TabBarBackground: '#ebecec',
 };
