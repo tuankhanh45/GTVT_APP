@@ -1,8 +1,8 @@
-import react, {Component} from 'react';
+import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
-import cl from '../assets/colors';
-import sz from '../assets/size';
+// import cl from '../assets/colors';
+// import sz from '../assets/size';
 
 export default class DocumentScreen extends Component {
   constructor(props) {

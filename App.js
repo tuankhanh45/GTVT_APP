@@ -9,10 +9,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
+import BottomTabBarNav from './src/navigation/BottomTabBarNav';
+
 const App: () => React$Node = () => {
   return (
-    <View>
-      <Text>Hello</Text>
+    <View style={{flex: 1}}>
+      <BottomTabBarNav />
     </View>
   );
 };
