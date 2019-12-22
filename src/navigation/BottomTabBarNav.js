@@ -9,6 +9,8 @@ import PostScreen from '../screen/PostScreen';
 import DetailsPostScreen from '../screen/DetailsPostScreen';
 import DocumentScreen from '../screen/DocumentScreen';
 
+import cl from '../assets/colors/Color';
+
 // Post stack
 
 const PostStack = createStackNavigator({
@@ -23,9 +25,9 @@ PostStack.navigationOptions = {
       // eslint-disable-next-line react-native/no-inline-styles
       style={{
         marginBottom: -3,
-        height: 30,
-        width: 30,
-        tintColor: focused ? '#ffc266' : '#fff',
+        height: 40,
+        width: 40,
+        tintColor: focused ? cl.IconTabBarActive : cl.IconTabBarDeActive,
       }}
     />
   ),
@@ -44,10 +46,10 @@ DocumentStack.navigationOptions = {
       source={require('../assets/images/feed.png')}
       // eslint-disable-next-line react-native/no-inline-styles
       style={{
-        marginBottom: -3,
-        height: 30,
-        width: 30,
-        tintColor: focused ? '#ffc266' : '#fff',
+        marginTop: 5,
+        height: 40,
+        width: 40,
+        tintColor: focused ? cl.IconTabBarActive : cl.IconTabBarDeActive,
       }}
     />
   ),
@@ -63,9 +65,14 @@ const BottomTabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      style: {backgroundColor: 'black'},
-      activeTintColor: '#ffc266',
-      inactiveTintColor: '#fff',
+      style: {
+        backgroundColor: cl.TabBarBackground,
+        borderColor: cl.TabBarBorder,
+        borderWidth: 0.5,
+        height: 60,
+      },
+      activeTintColor: cl.IconTabBarActive,
+      inactiveTintColor: cl.IconTabBarDeActive,
       labelStyle: {
         fontWeight: 'bold',
         fontSize: 14,
