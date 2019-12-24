@@ -11,9 +11,9 @@ export default class DetailsPostScreen extends Component {
   }
 
   static navigationOptions = ({navigation}) => {
-    // return {
-    //   header: null,
-    // };
+    return {
+      header: null,
+    };
   };
 
   componentDidMount() {
