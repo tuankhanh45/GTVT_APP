@@ -8,6 +8,7 @@ import LoginScreen from '../screen/LoginScreen';
 import PostScreen from '../screen/PostScreen';
 import DetailsPostScreen from '../screen/DetailsPostScreen';
 import DocumentScreen from '../screen/DocumentScreen';
+import DetailsDocumentScreen from '../screen/DetailsDocumentScreen';
 
 import cl from '../assets/colors/Color';
 
@@ -38,6 +39,7 @@ PostStack.path = '';
 
 const DocumentStack = createStackNavigator({
   Document: DocumentScreen,
+  DetailsDocument: DetailsDocumentScreen,
 });
 DocumentStack.navigationOptions = {
   tabBarLabel: 'Tài liệu',
