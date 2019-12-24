@@ -8,8 +8,10 @@ export default {
   TabBarTextSize: 18,
   ScreenWidth: width,
   ScreenHeight: height,
-  PostImageWidth: width - 10,
-  PostImageHeight: ((width - 5) / 16) * 9,
+  PostImage: width / 3,
+  PostImageDetailsWidth: width - 10,
+  PostImageDetailsHeight: ((width - 5) / 16) * 9,
   PostImageBorderRadius: 5,
   LogoLoginSize: width / 4,
+  BorderImageRadius: 5,
 };
