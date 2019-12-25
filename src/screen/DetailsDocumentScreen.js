@@ -14,7 +14,14 @@ export default class DetailsDocumentScreen extends Component {
   };
 
   componentDidMount() {
-    //
+    const path = '../assets/doc/pdf.pdf'; // absolute-path-to-my-local-file.
+    FileViewer.open(path)
+      .then((data) => {
+        // success
+      })
+      .catch(error => {
+        // error
+      });
   }
   render() {
     const source = {
@@ -22,6 +29,7 @@ export default class DetailsDocumentScreen extends Component {
       cache: true,
     };
     return (
+<<<<<<< HEAD
       <View style={styles.container}>
         <Text>DetailsDocumentScreen</Text>
         {/* <Pdf
@@ -40,6 +48,10 @@ export default class DetailsDocumentScreen extends Component {
           }}
           style={styles.pdf}
         /> */}
+=======
+      <View style={{flex: 1}}>
+        <Text>Hello  </Text>
+>>>>>>> 826209c844ccfcc904f19e9eb6759bcceaeae0de
       </View>
     );
   }
