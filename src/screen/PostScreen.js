@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     borderColor: cl.IconTabBarActive,
     borderWidth: 1,
     marginTop: 10,
+    borderRadius: sz.BorderImageRadius,
   },
   details: {margin: 10, justifyContent: 'flex-end'},
   image: {
