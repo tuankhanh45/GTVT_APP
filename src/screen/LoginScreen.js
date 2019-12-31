@@ -21,21 +21,16 @@ export default class LoginScreen extends Component {
   }
   render() {
     return (
-      <View style= {styles.container}>
-
-        <View style= {styles.up}> 
-        <Image 
-              source = {require('../assets/images/UTC.png')}
-              style = {{width: 100, height: 100,marginTop: 50}}
-            />
+      <View style={styles.container}>
+        <View style={styles.up}>
+          <Image
+            source={require('../assets/images/Logo.png')}
+            style={{width: 100, height: 100, marginTop: 50}}
+          />
         </View>
-        <View style= {styles.down}>
-          <View>
-
-          </View>
-          <View>
-
-          </View>
+        <View style={styles.down}>
+          <View></View>
+          <View></View>
         </View>
       </View>
     );
@@ -43,11 +38,11 @@ export default class LoginScreen extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'stretch',
-      backgroundColor: 'cyan'
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: 'cyan',
   },
   up: {
     flex: 3,
@@ -66,4 +61,4 @@ const styles = StyleSheet.create({
     width: 280,
     height: 45,
   },
-})
+});

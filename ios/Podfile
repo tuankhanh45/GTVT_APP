@@ -38,6 +38,8 @@ target 'GTVT_APP' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'GTVT_APPTests' do
     inherit! :search_paths
     # Pods for testing

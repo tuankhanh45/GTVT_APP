@@ -8,13 +8,12 @@
 
 import React from 'react';
 import {View, Text} from 'react-native';
-
-import BottomTabBarNav from './src/navigation/BottomTabBarNav';
+import TestLoginScreen from './src/screen/TestLoginScreen';
 
 const App: () => React$Node = () => {
   return (
     <View style={{flex: 1}}>
-      <BottomTabBarNav />
+      <TestLoginScreen />
     </View>
   );
 };
