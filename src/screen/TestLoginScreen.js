@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import BottomTabBarNav from '../navigation/BottomTabBarNav';
 
 export default class TestLoginScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {login: false};
+    this.state = {
+      login: false,
+      loadData: false,
+    };
   }
 
   static navigationOptions = ({navigation}) => {
@@ -17,8 +26,10 @@ export default class TestLoginScreen extends Component {
   login(user) {
     // check login here
     // sent request and check user in server
-    let checklogin = true;
-    this.setState({login: true});
+    this.setState({loadData: true});
+    setTimeout(() => {
+      this.setState({login: true, loadData: false});
+    }, 5000);
   }
   render() {
     if (!this.state.login) {
@@ -48,11 +59,15 @@ export default class TestLoginScreen extends Component {
               justifyContent: 'center',
               alignItems: 'center',
               marginTop: 30,
+              margin: 10,
             }}>
             <Text style={{color: '#4ec3f9', fontSize: 20, fontWeight: '600'}}>
               Login
             </Text>
           </TouchableOpacity>
+          {this.state.loadData && (
+            <ActivityIndicator size="large" color="#00ff00" />
+          )}
         </View>
       );
     } else return <BottomTabBarNav />;
