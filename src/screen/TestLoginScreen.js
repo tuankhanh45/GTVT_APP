@@ -9,7 +9,7 @@ import {
   Platform,
 } from 'react-native';
 
-import NetInfo from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo';
 import BottomTabBarNav from '../navigation/BottomTabBarNav';
 
 export default class TestLoginScreen extends Component {
@@ -28,41 +28,20 @@ export default class TestLoginScreen extends Component {
     };
   };
   componentDidMount() {
-    //this.CheckConnectivity();
+    this.CheckConnectivity();
   }
-  // CheckConnectivity() {
-  //   // For Android devices
-  //   if (Platform.OS === 'android') {
-  //     NetInfo.fetch.then(isConnected => {
-  //       if (isConnected) {
-  //         this.setState({checkInternet: true});
-  //         alert('yes internet');
-  //       } else {
-  //         this.setState({checkInternet: false});
-  //         alert('no internet');
-  //       }
-  //     });
-  //   } else {
-  //     // For iOS devices
-  //     NetInfo.addEventListener(
-  //       'connectionChange',
-  //       this.handleFirstConnectivityChange,
-  //     );
-  //   }
-  // }
+  
+  // check network connection
+  async CheckConnectivity() {
+    await NetInfo.fetch().then(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      this.setState({checkInternet: state.isConnected});
+    });
 
-  // handleFirstConnectivityChange = isConnected => {
-  //   NetInfo.isConnected.removeEventListener(
-  //     'connectionChange',
-  //     this.handleFirstConnectivityChange,
-  //   );
-
-  //   if (isConnected === false) {
-  //     Alert.alert('You are offline!');
-  //   } else {
-  //     Alert.alert('You are online!');
-  //   }
-  // };
+    if (!this.state.checkInternet)
+      alert(' No internet connection! Please check your network ');
+  }
 
   login(user) {
     // check login here
