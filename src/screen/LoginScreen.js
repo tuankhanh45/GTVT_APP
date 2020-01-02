@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -22,75 +22,54 @@ export default class sLoginScreen extends Component {
       login: false,
       loadData: false,
       checkInternet: false,
-      username:'',
-      pass:'',
-      gmail:'',
-      alert:'',
+      username: '',
+      pass: '',
+      gmail: '',
+      alert: '',
     };
   }
 
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({ navigation }) => {
     return {
       header: null,
     };
   };
   componentDidMount() {
-    //this.CheckConnectivity();
+    this.CheckConnectivity();
   }
-  // CheckConnectivity() {
-  //   // For Android devices
-  //   if (Platform.OS === 'android') {
-  //     NetInfo.fetch.then(isConnected => {
-  //       if (isConnected) {
-  //         this.setState({checkInternet: true});
-  //         alert('yes internet');
-  //       } else {
-  //         this.setState({checkInternet: false});
-  //         alert('no internet');
-  //       }
-  //     });
-  //   } else {
-  //     // For iOS devices
-  //     NetInfo.addEventListener(
-  //       'connectionChange',
-  //       this.handleFirstConnectivityChange,
-  //     );
-  //   }
-  // }
+  CheckConnectivity() {
+    NetInfo.fetch().then(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      if (!state.isConnected)
+        alert(
+          'No internet connected! please check your network and try again!',
+        );
+      // else alert('Internet connected');
+    });
+  }
 
-  // handleFirstConnectivityChange = isConnected => {
-  //   NetInfo.isConnected.removeEventListener(
-  //     'connectionChange',
-  //     this.handleFirstConnectivityChange,
-  //   );
-
-  //   if (isConnected === false) {
-  //     Alert.alert('You are offline!');
-  //   } else {
-  //     Alert.alert('You are online!');
-  //   }
-  // };
 
   login(user) {
     // check login here
     // sent request and check user in server
-    const {username, pass, gmail} = this.state
+    const { username, pass, gmail } = this.state
     if (username == "") {
-      this.setState({alert: "'Bạn chưa nhập tên đăng nhập'"})
+      this.setState({ alert: "'Bạn chưa nhập tên đăng nhập'" })
       return false
     } else if (pass == "") {
-      this.setState({alert:"'Bạn chưa nhập mật khẩu'"})
+      this.setState({ alert: "'Bạn chưa nhập mật khẩu'" })
       return false
     } else if (gmail == "") {
-      this.setState({alert:"'Bạn chưa nhập gmail'"})
+      this.setState({ alert: "'Bạn chưa nhập gmail'" })
       return false
-    } 
+    }
 
-    this.setState({loadData: true});
+    this.setState({ loadData: true });
     setTimeout(() => {
-      this.setState({login: true, loadData: false});
+      this.setState({ login: true, loadData: false });
     }, 2000);
-    
+
   }
 
   render() {
@@ -99,49 +78,49 @@ export default class sLoginScreen extends Component {
         <View style={styles.container}>
           <Image
             source={require('../assets/images/Logo.png')}
-            style={{width: 200, height: 200, marginBottom: 10}}
+            style={{ width: 200, height: 200, marginBottom: 10 }}
           />
           <Text>Đoàn trường Giao thông vận tải</Text>
-          <View style= {styles.textInputContainer}>
-                  <Icon name= 'user' size= {20} color={'gray'} style={styles.inputIcon}/>
-                  <TextInput 
-                      style= {styles.textInput}
-                      value= {this.state.username}
-                      onChangeText = {(username) => this.setState({username})}
-                      placeholder = 'Tên đăng nhập'                   
-                  />
-          </View> 
-          <View style= {styles.textInputContainer}>
-                  <Icon name= 'lock'  size= {20} color={'gray'} style={styles.inputIcon}/>
-                  <TextInput 
-                      style= {styles.textInput}
-                      value= {this.state.pass}
-                      onChangeText= {(pass) => this.setState({pass})}
-                      placeholder= 'Mật khẩu'
-                      secureTextEntry= {true}
-                  >
-                </TextInput>
-            </View>
-            <View style= {styles.textInputG}>
-                  <Icon name= 'envelope'  size= {20} color={'gray'} style={styles.inputIcon}/>
-                  <TextInput 
-                      style= {styles.textInputGmail}
-                      value= {this.state.gmail}
-                      onChangeText= {(gmail) => this.setState({gmail})}
-                      placeholder= 'Nhập gmail'
-                      textContentType= 'emailAddress'
-                      keyboardType= 'email-address'
-                  >
-                  </TextInput>
-            </View>
-           <Text style={{fontSize:13, color:'red', alignItems:'center',marginTop:10}}> {this.state.alert}</Text>
+          <View style={styles.textInputContainer}>
+            <Icon name='user' size={20} color={'gray'} style={styles.inputIcon} />
+            <TextInput
+              style={styles.textInput}
+              value={this.state.username}
+              onChangeText={(username) => this.setState({ username })}
+              placeholder='Tên đăng nhập'
+            />
+          </View>
+          <View style={styles.textInputContainer}>
+            <Icon name='lock' size={20} color={'gray'} style={styles.inputIcon} />
+            <TextInput
+              style={styles.textInput}
+              value={this.state.pass}
+              onChangeText={(pass) => this.setState({ pass })}
+              placeholder='Mật khẩu'
+              secureTextEntry={true}
+            >
+            </TextInput>
+          </View>
+          <View style={styles.textInputG}>
+            <Icon name='envelope' size={20} color={'gray'} style={styles.inputIcon} />
+            <TextInput
+              style={styles.textInputGmail}
+              value={this.state.gmail}
+              onChangeText={(gmail) => this.setState({ gmail })}
+              placeholder='Nhập gmail'
+              textContentType='emailAddress'
+              keyboardType='email-address'
+            >
+            </TextInput>
+          </View>
+          <Text style={{ fontSize: 13, color: 'red', alignItems: 'center', marginTop: 10 }}> {this.state.alert}</Text>
           <TouchableOpacity
             onPress={() => {
-              const user = {username: this.state.username, password: this.state.pass};
+              const user = { username: this.state.username, password: this.state.pass };
               this.login(user);
             }}
             style={styles.loginButton}>
-            <Text style={{color: '#4ec3f9', fontSize: 20, fontWeight: '600'}}>
+            <Text style={{ color: '#4ec3f9', fontSize: 20, fontWeight: '600' }}>
               Login
             </Text>
           </TouchableOpacity>

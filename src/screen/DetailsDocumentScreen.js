@@ -1,40 +1,52 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-//import FileViewer from 'react-native-file-viewer';
-
-// import cl from '../assets/colors/Color';
-// import sz from '../assets/size/Size';
+import {View, StyleSheet, Dimensions, ActivityIndicator} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 export default class DetailsDocumentScreen extends Component {
   constructor(props) {
     super(props);
+    this.state = {visible: true};
   }
-
   static navigationOptions = ({navigation}) => {
     return {
       header: null,
     };
   };
-
-  componentDidMount() {
-    // const path = '../assets/doc/pdf.pdf'; // absolute-path-to-my-local-file.
-    // FileViewer.open(path)
-    //   .then((data) => {
-    //     // success
-    //   })
-    //   .catch(error => {
-    //     // error
-    //   });
+  hideSpinner() {
+    this.setState({visible: !this.state.visible});
   }
+
   render() {
+    let url = 'https://www.utc.edu.vn/';
     return (
-      <View style={{flex: 1}}>
-        <Text>Hello  </Text>
+      <View style={styles.container}>
+        <WebView
+          onLoad={() => this.hideSpinner()}
+          style={styles.webview}
+          source={{uri: url}}
+        />
+        {this.state.visible && (
+          <ActivityIndicator
+            style={styles.indicator}
+            size="large"
+            color="#00ff00"
+          />
+        )}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 10, marginTop: 20},
+  container: {
+    flex: 1,
+  },
+  webview: {
+    flex: 1,
+  },
+  indicator: {
+    position: 'absolute',
+    left: Dimensions.get('window').width / 2,
+    top: Dimensions.get('window').height / 2 - 10,
+  },
 });
