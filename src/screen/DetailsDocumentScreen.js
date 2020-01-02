@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import FileViewer from 'react-native-file-viewer';
+//import FileViewer from 'react-native-file-viewer';
 
 // import cl from '../assets/colors/Color';
 // import sz from '../assets/size/Size';
@@ -17,14 +17,14 @@ export default class DetailsDocumentScreen extends Component {
   };
 
   componentDidMount() {
-    const path = '../assets/doc/pdf.pdf'; // absolute-path-to-my-local-file.
-    FileViewer.open(path)
-      .then((data) => {
-        // success
-      })
-      .catch(error => {
-        // error
-      });
+    // const path = '../assets/doc/pdf.pdf'; // absolute-path-to-my-local-file.
+    // FileViewer.open(path)
+    //   .then((data) => {
+    //     // success
+    //   })
+    //   .catch(error => {
+    //     // error
+    //   });
   }
   render() {
     return (

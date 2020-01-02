@@ -1,13 +1,32 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+  StyleSheet,
+  Alert,
+  Platform,
+} from 'react-native';
 
-// import cl from '../assets/colors';
-// import sz from '../assets/size';
+import Icon from 'react-native-vector-icons/FontAwesome5'
+//import NetInfo from "@react-native-community/netinfo";
+import BottomTabBarNav from '../navigation/BottomTabBarNav';
 
-export default class LoginScreen extends Component {
+export default class sLoginScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      login: false,
+      loadData: false,
+      checkInternet: false,
+      username:'',
+      pass:'',
+      gmail:'',
+      alert:'',
+    };
   }
 
   static navigationOptions = ({navigation}) => {
@@ -15,55 +34,176 @@ export default class LoginScreen extends Component {
       header: null,
     };
   };
-
   componentDidMount() {
-    // fetch data here
+    //this.CheckConnectivity();
   }
+  // CheckConnectivity() {
+  //   // For Android devices
+  //   if (Platform.OS === 'android') {
+  //     NetInfo.fetch.then(isConnected => {
+  //       if (isConnected) {
+  //         this.setState({checkInternet: true});
+  //         alert('yes internet');
+  //       } else {
+  //         this.setState({checkInternet: false});
+  //         alert('no internet');
+  //       }
+  //     });
+  //   } else {
+  //     // For iOS devices
+  //     NetInfo.addEventListener(
+  //       'connectionChange',
+  //       this.handleFirstConnectivityChange,
+  //     );
+  //   }
+  // }
+
+  // handleFirstConnectivityChange = isConnected => {
+  //   NetInfo.isConnected.removeEventListener(
+  //     'connectionChange',
+  //     this.handleFirstConnectivityChange,
+  //   );
+
+  //   if (isConnected === false) {
+  //     Alert.alert('You are offline!');
+  //   } else {
+  //     Alert.alert('You are online!');
+  //   }
+  // };
+
+  login(user) {
+    // check login here
+    // sent request and check user in server
+    const {username, pass, gmail} = this.state
+    if (username == "") {
+      this.setState({alert: "'Bạn chưa nhập tên đăng nhập'"})
+      return false
+    } else if (pass == "") {
+      this.setState({alert:"'Bạn chưa nhập mật khẩu'"})
+      return false
+    } else if (gmail == "") {
+      this.setState({alert:"'Bạn chưa nhập gmail'"})
+      return false
+    } 
+
+    this.setState({loadData: true});
+    setTimeout(() => {
+      this.setState({login: true, loadData: false});
+    }, 2000);
+    
+  }
+
   render() {
-    return (
-      <View style= {styles.container}>
-
-        <View style= {styles.up}> 
-        <Image 
-              source = {require('../assets/images/UTC.png')}
-              style = {{width: 100, height: 100,marginTop: 50}}
-            />
+    if (!this.state.login) {
+      return (
+        <View style={styles.container}>
+          <Image
+            source={require('../assets/images/Logo.png')}
+            style={{width: 200, height: 200, marginBottom: 10}}
+          />
+          <Text>Đoàn trường Giao thông vận tải</Text>
+          <View style= {styles.textInputContainer}>
+                  <Icon name= 'user' size= {20} color={'gray'} style={styles.inputIcon}/>
+                  <TextInput 
+                      style= {styles.textInput}
+                      value= {this.state.username}
+                      onChangeText = {(username) => this.setState({username})}
+                      placeholder = 'Tên đăng nhập'                   
+                  />
+          </View> 
+          <View style= {styles.textInputContainer}>
+                  <Icon name= 'lock'  size= {20} color={'gray'} style={styles.inputIcon}/>
+                  <TextInput 
+                      style= {styles.textInput}
+                      value= {this.state.pass}
+                      onChangeText= {(pass) => this.setState({pass})}
+                      placeholder= 'Mật khẩu'
+                      secureTextEntry= {true}
+                  >
+                </TextInput>
+            </View>
+            <View style= {styles.textInputG}>
+                  <Icon name= 'envelope'  size= {20} color={'gray'} style={styles.inputIcon}/>
+                  <TextInput 
+                      style= {styles.textInputGmail}
+                      value= {this.state.gmail}
+                      onChangeText= {(gmail) => this.setState({gmail})}
+                      placeholder= 'Nhập gmail'
+                      textContentType= 'emailAddress'
+                      keyboardType= 'email-address'
+                  >
+                  </TextInput>
+            </View>
+           <Text style={{fontSize:13, color:'red', alignItems:'center',marginTop:10}}> {this.state.alert}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              const user = {username: this.state.username, password: this.state.pass};
+              this.login(user);
+            }}
+            style={styles.loginButton}>
+            <Text style={{color: '#4ec3f9', fontSize: 20, fontWeight: '600'}}>
+              Login
+            </Text>
+          </TouchableOpacity>
+          {this.state.loadData && (
+            <ActivityIndicator size="large" color="#00ff00" />
+          )}
         </View>
-        <View style= {styles.down}>
-          <View>
-
-          </View>
-          <View>
-
-          </View>
-        </View>
-      </View>
-    );
+      );
+    } else return <BottomTabBarNav />;
   }
 }
+
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'stretch',
-      backgroundColor: 'cyan'
-  },
-  up: {
-    flex: 3,
-    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  down: {
-    flex: 7,
-    flexDirection: 'column',
-    alignItems: 'center',
+  text: {
+    fontSize: 15,
+    color: 'blue',
+    marginTop: 15,
+    alignItems: 'center'
   },
-  textIputContainer: {
-    paddingHorizontal: 10,
+  textInputContainer: {
+    marginTop: 20,
+    paddingHorizontal: 5,
+    paddingLeft: 25,
+    borderRadius: 15,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)'
   },
-  textIput: {
-    width: 280,
+  textInputG: {
+    marginTop: 20,
+    marginLeft: 120,
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    paddingLeft: 25,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+  },
+  textInput: {
+    width: 250,
     height: 45,
   },
+  textInputGmail: {
+    width: 200,
+    height: 40,
+  },
+  inputIcon: {
+    position: 'absolute',
+    left: 5,
+    top: 10,
+  },
+  loginButton: {
+    height: 40,
+    width: 150,
+    borderRadius: 10,
+    borderColor: '#4ec3f9',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    margin: 10,
+  },
 })
+
