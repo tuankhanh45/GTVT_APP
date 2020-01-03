@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   View,
   Text,
@@ -11,8 +11,8 @@ import {
   Platform,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome5'
-//import NetInfo from "@react-native-community/netinfo";
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import NetInfo from '@react-native-community/netinfo';
 import BottomTabBarNav from '../navigation/BottomTabBarNav';
 
 export default class sLoginScreen extends Component {
@@ -29,7 +29,7 @@ export default class sLoginScreen extends Component {
     };
   }
 
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({navigation}) => {
     return {
       header: null,
     };
@@ -49,27 +49,25 @@ export default class sLoginScreen extends Component {
     });
   }
 
-
   login(user) {
     // check login here
     // sent request and check user in server
-    const { username, pass, gmail } = this.state
-    if (username == "") {
-      this.setState({ alert: "'Bạn chưa nhập tên đăng nhập'" })
-      return false
-    } else if (pass == "") {
-      this.setState({ alert: "'Bạn chưa nhập mật khẩu'" })
-      return false
-    } else if (gmail == "") {
-      this.setState({ alert: "'Bạn chưa nhập gmail'" })
-      return false
+    const {username, pass, gmail} = this.state;
+    if (username == '') {
+      this.setState({alert: "'Bạn chưa nhập tên đăng nhập'"});
+      return false;
+    } else if (pass == '') {
+      this.setState({alert: "'Bạn chưa nhập mật khẩu'"});
+      return false;
+    } else if (gmail == '') {
+      this.setState({alert: "'Bạn chưa nhập gmail'"});
+      return false;
     }
 
-    this.setState({ loadData: true });
+    this.setState({loadData: true});
     setTimeout(() => {
-      this.setState({ login: true, loadData: false });
+      this.setState({login: true, loadData: false});
     }, 2000);
-
   }
 
   render() {
@@ -78,49 +76,58 @@ export default class sLoginScreen extends Component {
         <View style={styles.container}>
           <Image
             source={require('../assets/images/Logo.png')}
-            style={{ width: 200, height: 200, marginBottom: 10 }}
+            style={{width: 200, height: 200, marginBottom: 10}}
           />
-          <Text>Đoàn trường Giao thông vận tải</Text>
+          <Text style={{color: '#037',fontSize:24}}>Đoàn trường Giao thông vận tải</Text>
           <View style={styles.textInputContainer}>
-            <Icon name='user' size={20} color={'gray'} style={styles.inputIcon} />
+            <Icon name="user" size={20} style={styles.inputIcon} />
             <TextInput
               style={styles.textInput}
               value={this.state.username}
-              onChangeText={(username) => this.setState({ username })}
-              placeholder='Tên đăng nhập'
+              onChangeText={username => this.setState({username})}
+              placeholder="Tên đăng nhập"
             />
           </View>
           <View style={styles.textInputContainer}>
-            <Icon name='lock' size={20} color={'gray'} style={styles.inputIcon} />
+            <Icon name="lock" size={20} style={styles.inputIcon} />
             <TextInput
               style={styles.textInput}
               value={this.state.pass}
-              onChangeText={(pass) => this.setState({ pass })}
-              placeholder='Mật khẩu'
-              secureTextEntry={true}
-            >
-            </TextInput>
+              onChangeText={pass => this.setState({pass})}
+              placeholder="Mật khẩu"
+              secureTextEntry={true}></TextInput>
           </View>
           <View style={styles.textInputG}>
-            <Icon name='envelope' size={20} color={'gray'} style={styles.inputIcon} />
+            <Icon name="envelope" size={20} style={styles.inputIcon} />
             <TextInput
               style={styles.textInputGmail}
               value={this.state.gmail}
-              onChangeText={(gmail) => this.setState({ gmail })}
-              placeholder='Nhập gmail'
-              textContentType='emailAddress'
-              keyboardType='email-address'
-            >
-            </TextInput>
+              onChangeText={gmail => this.setState({gmail})}
+              placeholder="Nhập gmail"
+              textContentType="emailAddress"
+              keyboardType="email-address"></TextInput>
           </View>
-          <Text style={{ fontSize: 13, color: 'red', alignItems: 'center', marginTop: 10 }}> {this.state.alert}</Text>
+          <Text
+            style={{
+              fontSize: 13,
+              color: 'red',
+              alignItems: 'center',
+              marginTop: 10,
+            }}>
+            {' '}
+            {this.state.alert}
+          </Text>
+
           <TouchableOpacity
             onPress={() => {
-              const user = { username: this.state.username, password: this.state.pass };
+              const user = {
+                username: this.state.username,
+                password: this.state.pass,
+              };
               this.login(user);
             }}
             style={styles.loginButton}>
-            <Text style={{ color: '#4ec3f9', fontSize: 20, fontWeight: '600' }}>
+            <Text style={{color: '#4ec3f9', fontSize: 20, fontWeight: '600'}}>
               Login
             </Text>
           </TouchableOpacity>
@@ -143,14 +150,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'blue',
     marginTop: 15,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textInputContainer: {
     marginTop: 20,
     paddingHorizontal: 5,
     paddingLeft: 25,
     borderRadius: 15,
-    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+    borderColor: '#4ec3f9',
+    borderWidth: 0.8,
   },
   textInputG: {
     marginTop: 20,
@@ -158,20 +166,24 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 5,
     paddingLeft: 25,
-    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+    borderColor: '#4ec3f9',
+    borderWidth: 0.8,
   },
   textInput: {
     width: 250,
     height: 45,
+    marginLeft: 10,
   },
   textInputGmail: {
-    width: 200,
+    width: 150,
     height: 40,
+    marginLeft: 10,
   },
   inputIcon: {
     position: 'absolute',
-    left: 5,
+    left: 10,
     top: 10,
+    color: '#4ec3f9',
   },
   loginButton: {
     height: 40,
@@ -184,5 +196,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     margin: 10,
   },
-})
-
+});
