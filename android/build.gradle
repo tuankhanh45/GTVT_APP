@@ -6,7 +6,11 @@ buildscript {
         minSdkVersion = 16
         compileSdkVersion = 28
         targetSdkVersion = 28
+<<<<<<< HEAD
         # Only using Android Support libraries
+=======
+        // Only using Android Support libraries
+>>>>>>> c2f9d89c06080586614dff7869d7ea0bcf4cf034
         supportLibVersion = "28.0.0"
     }
     repositories {

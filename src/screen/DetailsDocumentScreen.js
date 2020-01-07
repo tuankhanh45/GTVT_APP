@@ -7,7 +7,11 @@ export default class DetailsDocumentScreen extends Component {
     super(props);
     this.state = {visible: true};
   }
-
+  static navigationOptions = ({navigation}) => {
+    return {
+      header: null,
+    };
+  };
   hideSpinner() {
     this.setState({visible: !this.state.visible});
   }
@@ -22,7 +26,11 @@ export default class DetailsDocumentScreen extends Component {
           source={{uri: url}}
         />
         {this.state.visible && (
-          <ActivityIndicator style={styles.indicator} size="large" color="#00ff00" />
+          <ActivityIndicator
+            style={styles.indicator}
+            size="large"
+            color="#00ff00"
+          />
         )}
       </View>
     );

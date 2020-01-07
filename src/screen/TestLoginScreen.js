@@ -18,7 +18,6 @@ export default class TestLoginScreen extends Component {
     this.state = {
       login: false,
       loadData: false,
-      checkInternet: false,
     };
   }
 
@@ -30,17 +29,16 @@ export default class TestLoginScreen extends Component {
   componentDidMount() {
     this.CheckConnectivity();
   }
-  
-  // check network connection
-  async CheckConnectivity() {
-    await NetInfo.fetch().then(state => {
+  CheckConnectivity() {
+    NetInfo.fetch().then(state => {
       console.log('Connection type', state.type);
       console.log('Is connected?', state.isConnected);
-      this.setState({checkInternet: state.isConnected});
+      if (!state.isConnected)
+        alert(
+          'No internet connected! please check your network and try again!',
+        );
+      // else alert('Internet connected');
     });
-
-    if (!this.state.checkInternet)
-      alert(' No internet connection! Please check your network ');
   }
 
   login(user) {
@@ -49,7 +47,7 @@ export default class TestLoginScreen extends Component {
     this.setState({loadData: true});
     setTimeout(() => {
       this.setState({login: true, loadData: false});
-    }, 2000);
+    }, 1500);
   }
   render() {
     if (!this.state.login) {

@@ -14,10 +14,12 @@ import cl from '../assets/colors/Color';
 
 // Post stack
 
-const PostStack = createStackNavigator({
-  Post: PostScreen,
-  DetailsPost: DetailsPostScreen,
-});
+const PostStack = createStackNavigator(
+      {
+      Post: PostScreen,
+      DetailsPost: DetailsPostScreen,
+      },
+  );
 PostStack.navigationOptions = {
   tabBarLabel: 'Kho ảnh',
   tabBarIcon: ({focused}) => (
